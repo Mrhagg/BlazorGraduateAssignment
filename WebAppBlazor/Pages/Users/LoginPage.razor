@@ -1,0 +1,48 @@
+﻿@page "/Users"
+@using WebAppBlazor.Models
+@inject HttpClient Http
+
+
+<h1 class="text-center-mb-3">List of Users</h1>
+<a class="btn btn-primary mb-3" href="/Users/Create">New User</a>
+@if(users == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@(user.FirstName + "" + user.LastName)</td>
+                    <td>@user.Email</td>
+
+                    <td style="white-space:nowrap">
+                        <a class="btn btn-primary btn-sm" href="/Users/Edit/@user.Id">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="/Users/Delete/@user.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<User>? users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await Http.GetFromJsonAsync<List<User>>("https://localhost:7041/api/User");
+    }
+}
