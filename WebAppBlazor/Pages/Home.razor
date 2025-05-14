@@ -1,7 +1,17 @@
 ﻿@page "/"
+@using WebAppBlazor.Pages.Auth
 
-<PageTitle>Home</PageTitle>
+<PageTitle>WoWInformation</PageTitle>
 
-<h1>Hello, world!</h1>
+<Div Class="Header">
+    <AuthorizeView>
+        <Authorized>
+            <p class="">Welcome! @context.User.Identity?.Name! Choose Your faction to explore!</p>
+        </Authorized>
+        <NotAuthorized>
+          <Login />
+        </NotAuthorized>
+    </AuthorizeView>
+</Div>
 
-Welcome to your new app.
+

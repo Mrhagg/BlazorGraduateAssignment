@@ -1,3 +1,4 @@
+using BlazorWebApi.Interface;
 using BlazorWebApi.Models;
 using BlazorWebApi.Services;
 using Microsoft.AspNetCore.Identity;
@@ -21,7 +22,10 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
 
+var emailConfig = builder.Configuration.GetSection("EmailConfiguration");
+.GetSection("EmailConfiguration").Get<EmailConfiguration>();
 
 
 

@@ -1,22 +1,19 @@
-﻿using BlazorWebApi.Models;
+﻿using BlazorWebApi.Dtos;
+using BlazorWebApi.Interface;
+using BlazorWebApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using System.Net;
 
 
 namespace BlazorWebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AccountController : ControllerBase
+public class AccountController(IEmailSender emailSender, UserManager<IdentityUser> userManager) : ControllerBase
 {
-    private readonly UserManager<IdentityUser> userManager;
-
-    public AccountController(UserManager<IdentityUser> userManager)
-    {
-        this.userManager = userManager;
-    }
+    private readonly UserManager<IdentityUser> userManager = userManager;
 
     [HttpGet]
     public IActionResult Welcome()
@@ -51,5 +48,43 @@ public class AccountController : ControllerBase
             return Ok(userProfile);
         }
     }
-    
+
+    [HttpPost("Forgot-password")]
+    public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDto model)
+    {
+        var user = await userManager.FindByEmailAsync(model.Email!);
+        if (user == null)
+        {
+            return Ok();
+        }
+
+        var token = await userManager.GeneratePasswordResetTokenAsync(user);
+        var encodedToken = WebUtility.UrlEncode(token);
+
+        var resetUrl = $"http://localhost:5178/ResetPassword?email={model.Email}&token={encodedToken}";
+
+
+        await emailSender.SendEmailAsync(
+            model.Email!,
+            "Reset your password",
+            $"Click the link to reset your password: <a href='{resetUrl}'>Reset Password</a>"
+        );
+        try
+        {
+            await emailSender.SendEmailAsync(
+                model.Email!,
+                "Reset your password",
+                $"Click the link to reset your password: <a href='{resetUrl}'>Reset Password</a>"
+            );
+          Console.WriteLine($"Password reset link sent to {model.Email}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error sending email: {ex.Message}");
+            return StatusCode(500, "Error sending email");
+        }
+
+        return Ok("Password reset token sent to email");
+    }   
+
 }

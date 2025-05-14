@@ -1,0 +1,74 @@
+﻿.account-register {
+    font-size: 15px;
+    font-style: italic;
+    font-family: 'Comic Sans MS';
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.login {
+    background-color: #494862;
+}
+
+.text-center {
+    font-family: 'Comic Sans MS';
+    color: #FFFFFF;
+}
+
+.form-label {
+    font-family: 'Comic Sans MS';
+    color: #FFFFFF;
+}
+
+.btn-login {
+    border-radius: 10px;
+    background-color: #38598b;
+    color: #FFFFFF;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 16px;
+    font-family: 'Comic Sans MS';
+}
+
+.btn-login:hover {
+    background-color: #36a4b7;
+        
+    color: #FFFFFF;
+    outline: none;
+}
+
+.btn-cancel {
+    border-radius: 10px;
+    background-color: #38598b;
+    color: #FFFFFF;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 16px;
+    font-family: 'Comic Sans MS';
+    text-decoration: none;
+    outline: none;
+}
+
+.btn-cancel:hover {
+    background-color: #36a4b7;
+    color: #FFFFFF;
+}
+
+.btn-navigation {
+    border-radius: 10px;
+    background-color: #597c51;
+    color: #FFFFFF;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    
+    font-size: 16px;
+    font-family: 'Comic Sans MS';
+
+}
+
+.btn-navigation:hover{
+    background-color: #6dd3a1;
+    color: #FFFFFF;
+}
+
+.signup{
+    margin-left: 10px;
+    cursor: pointer;
+}

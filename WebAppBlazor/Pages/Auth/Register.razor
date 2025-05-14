@@ -5,7 +5,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xl-6 mx-auto rounded border p-4" style="margin: 60px;">
+        <div class="register col-xl-4 mx-auto rounded border p-4" style="margin: 60px;">
             <h3 class="text-center mb-3">Register</h3>
             <hr />
 
@@ -23,21 +23,21 @@
             }
 
             <div class="row mb-3">
-                <label class="col-md-4 col-form-label">Email</label>
+                <label class="email col-md-4 col-form-label">Email</label>
                 <div class="col-md-8">
                     <input class="form-control" @bind="email" />
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label class="col-md-4 col-form-label">Password</label>
+                <label class="password col-md-4 col-form-label">Password</label>
                 <div class="col-md-8">
                     <input class="form-control" type="password" @bind="password" />
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label class="col-md-4 col-form-label">Confirm Password</label>
+                <label class="confirmPassword col-md-4 col-form-label">Confirm Password</label>
                 <div class="col-md-8">
                     <input class="form-control" type="password" @bind="confirmPassword" />
                 </div>
@@ -45,10 +45,10 @@
 
             <div class="row">
                 <div class="offset-md-4 col d-grid">
-                    <button class="btn btn-primary" @onclick="RegisterAsync">Register</button>
+                    <button class="btn-register" @onclick="RegisterAsync">Register</button>
                 </div>
                 <div class="col d-grid">
-                    <a class="btn btn-outline-primary" href="/" role="button">Cancel</a>
+                    <button class="btn-cancel" @onclick="RedirectToHomePage">Cancel</button>
                 </div>
             </div>
 
@@ -90,5 +90,10 @@
         {
             errors = resp.Errors;
         }
+    }
+
+    private void RedirectToHomePage()
+    {
+        navManager.NavigateTo("/");
     }
 }

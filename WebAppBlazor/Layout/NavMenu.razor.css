@@ -1,14 +1,20 @@
 .navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #494862;
 }
 
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: #494862;
+}
+.navbar-logo {
+    height: 40px;
+    margin-right: 15px;
+    margin-bottom: 5px;
 }
 
 .navbar-brand {
     font-size: 1.1rem;
+    font-family: 'Comic Sans MS';
 }
 
 .bi {
@@ -36,6 +42,7 @@
 .nav-item {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
+
 }
 
     .nav-item:first-of-type {

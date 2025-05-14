@@ -1,0 +1,54 @@
+﻿.register {
+    background-color: #494862
+}
+
+.text-center {
+    font-family: 'Comic Sans MS';
+    color: #FFFFFF;
+}
+
+.email {
+    font-family: 'Comic Sans MS';
+    color: #FFFFFF;
+}
+
+.password {
+    font-family: 'Comic Sans MS';
+    color: #FFFFFF;
+}
+
+.confirmPassword {
+    font-family: 'Comic Sans MS';
+    color: #FFFFFF;
+}
+
+.btn-register {
+    border-radius: 10px;
+    background-color: #38598b;
+    color: #FFFFFF;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 16px;
+    font-family: 'Comic Sans MS';
+}
+
+.btn-register:hover {
+    background-color: #36a4b7;
+    color: #FFFFFF;
+    outline: none;
+}
+
+.btn-cancel {
+    border-radius: 10px;
+    background-color: #38598b;
+    color: #FFFFFF;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 16px;
+    font-family: 'Comic Sans MS';
+  
+}
+
+.btn-cancel:hover {
+    background-color: #36a4b7;
+    color: #FFFFFF;
+    outline: none;
+}
