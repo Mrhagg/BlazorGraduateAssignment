@@ -2,9 +2,9 @@
 namespace BlazorWebApi.Services;
 
 
-public class SendEmailService(IEmailSender emailSender)
+public class SendEmailService(IEmailService emailSender)
 {
-    private readonly IEmailSender emailSender = emailSender;
+    private readonly IEmailService emailSender = emailSender;
 
 
     public async Task SendPasswordResetEmail(string email, string token)

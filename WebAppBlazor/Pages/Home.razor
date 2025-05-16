@@ -3,13 +3,20 @@
 
 <PageTitle>WoWInformation</PageTitle>
 
+
+
 <Div Class="Header">
     <AuthorizeView>
         <Authorized>
-            <p class="">Welcome! @context.User.Identity?.Name! Choose Your faction to explore!</p>
+            <p class="welcome">Welcome! @context.User.Identity?.Name! Choose Your faction to explore!</p>
+            <Div>
+                <Factions />
+            </Div>
         </Authorized>
         <NotAuthorized>
-          <Login />
+            <section class="main">
+                <Login />
+            </section>
         </NotAuthorized>
     </AuthorizeView>
 </Div>

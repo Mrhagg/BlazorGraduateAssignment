@@ -11,8 +11,8 @@
         <div class="top-row px-4">
             <AuthorizeView>
                 <Authorized>
-                    <p class="my-3 me-3">@context.User.Identity?.Name</p>
-                    <button class="btn btn-primary" @onclick="Logout">Logout</button>
+                    <p class="user">@context.User.Identity?.Name</p>
+                    <button class="btn-logout" @onclick="Logout">Logout</button>
                 </Authorized>
             </AuthorizeView>
         </div>

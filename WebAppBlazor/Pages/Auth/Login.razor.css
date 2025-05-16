@@ -68,7 +68,32 @@
     color: #FFFFFF;
 }
 
-.signup{
+.signup {
     margin-left: 10px;
     cursor: pointer;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.signup:hover {
+    color: #000000;
+    transition: ease-in-out 0.2s;
+}
+.forgot-password {
+    font-size: 15px;
+    font-style: italic;
+    font-family: 'Comic Sans MS';
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.reset {
+    cursor: pointer;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.reset:hover {
+    color: #000000;
+    transition: ease-in-out 0.2s;
 }

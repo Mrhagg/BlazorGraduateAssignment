@@ -1,13 +1,15 @@
-﻿main
+﻿.main {
+    background-color: #000000
+}
+
+main
 {
     background-color: black;
 }
-
 .wow-info {
     color: red;
 }
 
 .welcome {
-
-    font-family: sans-serif;
+    font-family: 'Comic Sans MS';
 }

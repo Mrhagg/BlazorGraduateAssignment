@@ -3,6 +3,9 @@ using BlazorWebApi.Models;
 using BlazorWebApi.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using System.Net;
+using System.Net.Mail;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,12 +25,35 @@ builder.Services.AddIdentityApiEndpoints<IdentityUser>()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
+builder.Services.AddTransient<IEmailService, EmailService>();
 
-var emailConfig = builder.Configuration.GetSection("EmailConfiguration");
-.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+var smtpSettings = builder.Configuration.GetSection("SmtpSettings").Get<SmtpSettings>();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Example API",
+        Version = "v1",
+        Description = "An example of an ASP.NET Core Web API",
+        Contact = new OpenApiContact
+        {
+            Name = "",
+            Email = "",
+            Url = new Uri("https://example.com/contact"),
+        },
+    });
 
 
+});
+
+builder.Services.AddFluentEmail(smtpSettings!.FromEmail)
+    .AddRazorRenderer()
+    .AddSmtpSender(new SmtpClient(smtpSettings.Host)
+    {
+        Port = smtpSettings.Port,
+        Credentials = new NetworkCredential(smtpSettings.SmtpUsername, smtpSettings.SmtpPassword),
+        EnableSsl = true,
+    });
 
 builder.Services.AddCors(options =>
 {
@@ -43,7 +69,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -61,3 +87,13 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public class SmtpSettings
+{
+    public string Host { get; set; } = string.Empty;
+    public int Port { get; set; }
+    public string SmtpUsername { get; set; } = string.Empty;
+    public string SmtpPassword { get; set; } = string.Empty;
+    public string FromEmail { get; set; } = string.Empty;
+    public string FromName { get; set; } = string.Empty;
+}

@@ -22,7 +22,7 @@
 
     <div class="mb-3">
         <label class="form-label">Password</label>
-        <input class="form-control" @bind="password" />
+        <input type="password" class="form-control" @bind="password" />
     </div>
 
     <div class="row">
@@ -32,6 +32,12 @@
         <div class="col d-grid">
             <button class="btn-cancel">Cancel</button>
         </div> 
+    </div>
+
+    <div class="col">
+        <div class="col d-grid mt-4">
+            <p class="forgot-password"><span><a class="reset" @onclick="NavigateToForgotPasswordPage">Forgot your password?</a></span></p>
+        </div>
     </div>
 
     <div class="row">
@@ -47,8 +53,8 @@
     public string email = "";
     public string password = "";
     public string error = "";
- 
-    
+
+
 
 
     private async Task LoginAsync()
@@ -65,7 +71,10 @@
         }
     }
 
-    
+    private void NavigateToForgotPasswordPage()
+    {
+        navManager.NavigateTo("/Forgot-password");
+    }
 
     private void NavigateToRegisterPage()
     {
