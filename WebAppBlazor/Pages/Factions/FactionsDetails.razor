@@ -1,0 +1,56 @@
+﻿@page "/factions/{FactionId:int}"
+@using WebAppBlazor.Components
+@inject HttpClient Http
+
+<h3 class="factionName">@factionName</h3>
+
+@if (races == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <select class="racelist" @onchange="OnRaceChanged">
+        <option class="raceoptions" value="">Choose Race</option>
+        @foreach (var race in races)
+        {
+            <option value="@race.Id">@race.Name</option>
+        }
+    </select>
+
+    @if (selectedRace != null)
+    {
+        <RaceDetails Race="selectedRace" />
+    }
+}
+
+@code {
+    [Parameter]
+    public int FactionId { get; set; }
+
+    private string? factionName;
+    private List<CharacterRaceDto>? races;
+    private CharacterRaceDto? selectedRace;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var faction = await Http.GetFromJsonAsync<FactionDto>($"api/factions/{FactionId}");
+        factionName = faction?.Name ?? "Okänd faction";
+
+        races = await Http.GetFromJsonAsync<List<CharacterRaceDto>>($"api/factions/{FactionId}/races");
+    }
+
+    private void OnRaceChanged(ChangeEventArgs e)
+    {
+        var selectedIdString = e.Value?.ToString();
+        if (int.TryParse(selectedIdString, out var selectedId))
+        {
+            selectedRace = races?.FirstOrDefault(r => r.Id == selectedId);
+        }
+        else
+        {
+            selectedRace = null;
+        }
+    }
+}
+

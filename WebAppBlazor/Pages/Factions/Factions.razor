@@ -1,89 +1,33 @@
 ﻿@page "/factions"
 @inject HttpClient Http
+@inject NavigationManager Navigation
 
-<h3>Choose your Faction</h3>
 
-@if (factions == null)
+    <h3>Choose your Faction</h3>
+
+    @if (factions == null)
 {
-    <p>Loading factions...</p>
+    <p>Laddar factions...</p>
 }
 else
 {
-    <div class="d-flex justify-content-center gap-5 my-4">
+    <div>
         @foreach (var faction in factions)
         {
-            <div style="cursor:pointer; text-align:center" @onclick="() => SelectFaction(faction.Id)">
-                <img src="@faction.ImageUrl" alt="@faction.Name" style="width:150px;" />
-                <p>@faction.Name</p>
-            </div>
+            var url = $"/factions/{faction.Id}";
+            <img src="@faction.ImageUrl" alt="@faction.Name"
+                 style="width:150px; cursor:pointer; margin-right:20px"
+                 @onclick="() => Navigation.NavigateTo(url)" />
         }
+
     </div>
 }
 
-@if (selectedFactionRaces != null)
-{
-    <h4>@selectedFactionName Races</h4>
-
-    <table class="table table-striped table-bordered" style="max-width:700px; margin:auto;">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Classes</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var race in selectedFactionRaces)
-            {
-                <tr>
-                    <td>@race.Name</td>
-                    <td>@race.Description</td>
-                    <td>@string.Join(", ", race.Classes)</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
-
-
-
-
-
-
-
 @code {
     private List<FactionDto>? factions;
-    private List<RaceDto>? selectedFactionRaces;
-    private string? selectedFactionName;
 
     protected override async Task OnInitializedAsync()
     {
         factions = await Http.GetFromJsonAsync<List<FactionDto>>("api/factions");
-    }
-
-    private async Task SelectFaction(int factionId)
-    {
-        selectedFactionRaces = null;
-
-        var faction = factions?.FirstOrDefault(f => f.Id == factionId);
-        selectedFactionName = faction?.Name ?? "";
-
-        selectedFactionRaces = await Http.GetFromJsonAsync<List<RaceDto>>($"api/factions/{factionId}");
-    }
-
-    public class FactionDto
-    {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public string? ImageUrl { get; set; }
-    }
-
-    public class RaceDto
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public string Description { get; set; } = null!;
-        public List<string> Classes { get; set; } = new();
     }
 }

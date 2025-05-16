@@ -5,7 +5,7 @@ public class CharacterRace
     public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
-
+    public string? ImageUrl { get; set; }
     public int FactionId { get; set; }
     public Factions Faction { get; set; } = null!;
 

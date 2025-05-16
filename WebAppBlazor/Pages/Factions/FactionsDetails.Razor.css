@@ -1,0 +1,14 @@
+﻿.factionName{
+    margin-bottom: 20px;
+    font-family: 'Comic Sans MS';
+}
+
+.racelist{
+    border:1px solid red;
+    border-radius: 5px;
+    padding: 10px 10px 10px 10px;
+}
+
+.raceoptions{
+    text-align: center;
+}

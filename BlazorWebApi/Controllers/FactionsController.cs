@@ -30,26 +30,57 @@ public class FactionsController : ControllerBase
         return Ok(factions);
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<FactionsDto>> GetFactionById(int id)
+    {
+        var faction = await context.Factions
+            .Where(f => f.Id == id)
+            .Select(f => new FactionsDto
+            {
+                Id = f.Id,
+                Name = f.Name,
+                ImageUrl = f.ImageUrl
+            }).FirstOrDefaultAsync();
 
-    [HttpGet("{id}/races")]
+        if (faction == null)
+            return NotFound();
+
+        return Ok(faction);
+    }
+
+
+
+    [HttpGet("{factionId}/races")]
     public async Task<ActionResult<List<RaceDto>>> GetRacesByFaction(int factionId)
     {
         var factionExists = await context.Factions.AnyAsync(f => f.Id == factionId);
         if (!factionExists)
             return NotFound($"Faction with Id {factionId} not found.");
 
-        var races = await context.CharacterRaces.Where(r => r.FactionId == factionId).Include(r => r.RaceWowClasses).ThenInclude(rwc => rwc.WowClass).Select(r => new
+        var races = await context.CharacterRaces
+        .Where(r => r.FactionId == factionId)
+        .Include(r => r.RaceWowClasses)
+            .ThenInclude(rwc => rwc.WowClass)
+        .ToListAsync();
+
+        var raceDtos = races.Select(r => new RaceDto
         {
-            r.Id,
-            r.Name,
-            r.Description,
-            Classes = r.RaceWowClasses.Select(rwc => rwc.WowClass.Name),
-        }).ToListAsync();
+            Id = r.Id,
+            Name = r.Name,
+            Description = r.Description,
+            ImageUrl = r.ImageUrl,
+            AllowedClasses = r.RaceWowClasses.Select(rwc => new WowClassDto
+            {
+                Id = rwc.WowClass.Id,
+                Name = rwc.WowClass.Name
+            }).ToList()
+
+        }).ToList();
 
         if (races == null || races.Count == 0)
             return NotFound();
 
-        return Ok(races);
+        return Ok(raceDtos);
     }
 
 }
