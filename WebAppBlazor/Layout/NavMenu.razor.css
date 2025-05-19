@@ -4,7 +4,12 @@
 
 .top-row {
     height: 3.5rem;
-    background-color: #494862;
+    background-image: url('/images/wowbg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
 }
 .navbar-logo {
     height: 40px;
@@ -63,12 +68,12 @@
     }
 
 .nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.37);
+    background-color: #413d44;
     color: white;
 }
 
 .nav-item ::deep a:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: #413d44;
     color: white;
 }
 

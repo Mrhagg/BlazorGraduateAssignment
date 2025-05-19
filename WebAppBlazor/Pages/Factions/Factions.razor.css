@@ -1,1 +1,52 @@
-﻿
+﻿.factions {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-right: 15rem;
+   gap: 20px;
+}
+
+.horde {
+    color: red;
+    margin-left: 3rem;
+    margin-bottom: 2rem;
+
+    font-family: 'Comic Sans MS';
+}
+
+.horde:hover{
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.alliance {
+    color: #0f6ca9;
+    margin-left: 3rem;
+    margin-bottom: 2rem;
+
+    font-family: 'Comic Sans MS';
+}
+
+.alliance:hover {
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.img {
+    color: #000000;
+    border: 2px solid red;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Comic Sans MS';
+  color: #FFFFFF;
+  margin-bottom: 5rem;
+  margin-right: 15rem;
+}
+

@@ -43,7 +43,7 @@ else
     private void OnRaceChanged(ChangeEventArgs e)
     {
         var selectedIdString = e.Value?.ToString();
-        if (int.TryParse(selectedIdString, out var selectedId))
+        if (int.TryParse(e.Value?.ToString(), out var selectedId))
         {
             selectedRace = races?.FirstOrDefault(r => r.Id == selectedId);
         }

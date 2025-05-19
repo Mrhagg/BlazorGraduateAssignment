@@ -1,15 +1,40 @@
-﻿.main {
-    background-color: #000000
+﻿html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+   
 }
 
-main
-{
-    background-color: black;
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    background-color: #413d44;
+    background-image: url('/images/wowbg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    
 }
-.wow-info {
-    color: red;
+
+main {
+    flex: 1; 
+
 }
 
 .welcome {
+    color: #FFFFFF;
     font-family: 'Comic Sans MS';
 }
+
+.logintitle {
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 2rem;
+    font-family: 'Comic Sans MS';
+}
+
+

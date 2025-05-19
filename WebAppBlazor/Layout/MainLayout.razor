@@ -3,9 +3,14 @@
 @inject NavigationManager navManager
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+    <AuthorizeView>
+        <Authorized>
+            <div class="sidebar">
+                <NavMenu />
+            </div>
+        </Authorized>
+    </AuthorizeView>
+    
 
     <main>
         <div class="top-row px-4">
@@ -13,6 +18,8 @@
                 <Authorized>
                     <p class="user">@context.User.Identity?.Name</p>
                     <button class="btn-logout" @onclick="Logout">Logout</button>
+
+
                 </Authorized>
             </AuthorizeView>
         </div>
@@ -20,7 +27,11 @@
         <article class="content px-4">
             @Body
         </article>
+
+        <Footer />
     </main>
+
+
 </div>
 
 

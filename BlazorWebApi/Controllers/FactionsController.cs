@@ -24,7 +24,7 @@ public class FactionsController : ControllerBase
             {
                 f.Id,
                 f.Name,
-                f.ImageUrl
+                f.ImageFileName
             }).ToListAsync();
 
         return Ok(factions);
@@ -39,7 +39,7 @@ public class FactionsController : ControllerBase
             {
                 Id = f.Id,
                 Name = f.Name,
-                ImageUrl = f.ImageUrl
+                ImageFileName = f.ImageFileName
             }).FirstOrDefaultAsync();
 
         if (faction == null)
@@ -68,7 +68,7 @@ public class FactionsController : ControllerBase
             Id = r.Id,
             Name = r.Name,
             Description = r.Description,
-            ImageUrl = r.ImageUrl,
+            ImageFileName = r.ImageFileName,
             AllowedClasses = r.RaceWowClasses.Select(rwc => new WowClassDto
             {
                 Id = rwc.WowClass.Id,
@@ -81,6 +81,23 @@ public class FactionsController : ControllerBase
             return NotFound();
 
         return Ok(raceDtos);
+    }
+
+    [HttpGet("{id}/FactionImages")]
+    public async Task<IActionResult> GetImageById(int id)
+    {
+        var faction = await context.Factions.FindAsync(id);
+        if (faction == null)
+            return NotFound();
+
+        var dto = new FactionsDto
+        {
+            Id = faction.Id,
+            Name = faction.Name,
+            ImageFileName = faction.ImageFileName
+        };
+
+        return Ok(dto);
     }
 
 }

@@ -7,7 +7,11 @@
 }
 
 .login {
-    background-color: #494862;
+    background-image: url('/images/wowbg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .text-center {
@@ -97,3 +101,4 @@
     color: #000000;
     transition: ease-in-out 0.2s;
 }
+
