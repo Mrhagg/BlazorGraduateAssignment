@@ -3,34 +3,38 @@
 @inject NavigationManager Navigation
 
 
-    <h3 class="title">Choose your Faction</h3>
-
-    @if (factions == null)
-    {
-        <p>Loading...</p>
-    }
-    else
-    {
-        <div class="factions">
-            @foreach (var faction in factions)
-            {
-                var url = $"/factions/{faction.Id}";
-                <Div>
-                    @if (faction.Id == 1)
-                    {
-                        <h3 class="alliance">@faction.Name</h3>
-                    }
-                    else if (faction.Id == 2)
-                    {
-                        <h3 class="horde">@faction.Name</h3>
-                    }
-                    <img class="img" src="@faction.ImageUrl" alt="@faction.Name"
-                         style="width:150px; cursor:pointer; margin-right:20px"
-                         @onclick="() => Navigation.NavigateTo(url)" />
-                </Div>
-            }
-        </div>
-    }
+<body>
+    <main>
+        @if (factions == null)
+        {
+            <p>Loading...</p>
+        }
+        else
+        {
+            <h3 class="title">Choose your Faction</h3>
+            <div class="factions">
+                @foreach (var faction in factions)
+                {
+                    var url = $"/factions/{faction.Id}";
+                    <Div>
+                        @if (faction.Id == 1)
+                        {
+                            <h3 class="alliance">@faction.Name</h3>
+                        }
+                        else if (faction.Id == 2)
+                        {
+                            <h3 class="horde">@faction.Name</h3>
+                        }
+                        <img class="img" src="@faction.ImageUrl" alt="@faction.Name"
+                             style="width:150px; cursor:pointer; margin-right:20px"
+                             @onclick="() => Navigation.NavigateTo(url)" />
+                    </Div>
+                }
+            </div>
+        }
+    </main>
+</body>
+   
 
 
 

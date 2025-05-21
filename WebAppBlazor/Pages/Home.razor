@@ -4,13 +4,10 @@
 <PageTitle>WoWInformation</PageTitle>
 
 <body>
-
- 
     <main>
         <Div>
             <AuthorizeView>
                 <Authorized>
-                    <p class="welcome">Welcome! @context.User.Identity?.Name! Choose Your faction to explore!</p>
                     <Div>
                         <Factions />
                     </Div>
@@ -20,7 +17,6 @@
                     <section class="main">
                         <Login />
                     </section>
-
                 </NotAuthorized>
             </AuthorizeView>
         </Div>

@@ -3,7 +3,7 @@
    align-items: center;
    justify-content: center;
    margin-right: 15rem;
-   gap: 20px;
+   gap: 8rem;
 }
 
 .horde {
@@ -34,7 +34,7 @@
 
 .img {
     color: #000000;
-    border: 2px solid red;
+    border: 2px solid #FFFFFF;
     border-radius: 10px;
     margin-left: 20px;
 }
@@ -47,6 +47,7 @@
   font-family: 'Comic Sans MS';
   color: #FFFFFF;
   margin-bottom: 5rem;
+  margin-top: 10rem;
   margin-right: 15rem;
 }
 

@@ -1,0 +1,33 @@
+﻿.title {
+    margin-bottom: 2rem;
+    color: #f1c40f;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 2rem;
+    border-bottom: 2px solid #f1c40f;
+    padding-bottom: 0.5rem;
+}
+
+.profile-box {
+    background-color: #34495e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    max-width: 600px; 
+    margin: 0 auto; 
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+
+.profile-label {
+    color: #ecf0f1;
+    font-weight: 600;
+}
+
+.profile-input {
+    color: #ecf0f1;
+    background-color: transparent;
+    border: none;
+}
+
+.row {
+    font-family: 'Comic Sans MS';
+}

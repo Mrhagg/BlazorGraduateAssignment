@@ -2,6 +2,16 @@
     background-color: #494862;
 }
 
+.container{
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+
+.profile{
+    align-items:center;
+    color: #FFFFFF;
+}
+
 .top-row {
     height: 3.5rem;
     background-image: url('/images/wowbg.jpg');

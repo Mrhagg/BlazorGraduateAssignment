@@ -1,0 +1,73 @@
+﻿.race-details {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.2s ease;
+    color: #ffffff;
+    font-family: 'Comic Sans MS';
+    text-decoration: none;
+    color: white;
+}
+
+.title{
+    color: #FFFFFF;
+    font-family: 'Comic Sans MS';
+}
+
+
+
+.race-grid {
+    display: grid;
+    grid-template-columns: min-content;
+    gap: 20px;
+    padding: 20px;
+}
+
+
+img {
+    width: 500px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    justify-content: center;
+}
+
+.tabs button {
+    background-color: #444;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Comic Sans MS';
+}
+
+.tabs button:hover {
+    background-color: #666;
+}
+
+.active-tab {
+    background-color: #222;
+    font-weight: bold;
+}
+
+.back-button {
+    background-color: #444;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-family: 'Comic Sans MS';
+}
+
+.back-button:hover {
+    background-color: #666;
+}
+
+

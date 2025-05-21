@@ -2,61 +2,63 @@
 @inject AuthenticationStateProvider provider
 @inject NavigationManager navManager
 
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="register col-xl-4 mx-auto rounded border p-4" style="margin: 60px;">
-            <h3 class="text-center mb-3">Register</h3>
-            <hr />
-
-
-            @if (errors.Length > 0)
-            {
-                <div class="alert alert-danger" role="alert">
-                    <ul>
-                        @foreach (var error in errors)
-                        {
-                            <li>@error</li>
-                        }
-                    </ul>
-                </div>
-            }
-
-            <div class="row mb-3">
-                <label class="email col-md-4 col-form-label">Email</label>
-                <div class="col-md-8">
-                    <input class="form-control" @bind="email" />
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label class="password col-md-4 col-form-label">Password</label>
-                <div class="col-md-8">
-                    <input class="form-control" type="password" @bind="password" />
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label class="confirmPassword col-md-4 col-form-label">Confirm Password</label>
-                <div class="col-md-8">
-                    <input class="form-control" type="password" @bind="confirmPassword" />
-                </div>
-            </div>
-
+<body>
+    <main>
+        <div class="container-fluid">
             <div class="row">
-                <div class="offset-md-4 col d-grid">
-                    <button class="btn-register" @onclick="RegisterAsync">Register</button>
-                </div>
-                <div class="col d-grid">
-                    <button class="btn-cancel" @onclick="RedirectToHomePage">Cancel</button>
+                <div class="register col-xl-4 mx-auto rounded border p-4" style="margin: 60px;">
+                    <h3 class="text-center mb-3">Register</h3>
+                    <hr />
+
+
+                    @if (errors.Length > 0)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            <ul>
+                                @foreach (var error in errors)
+                                {
+                                    <li>@error</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    <div class="row mb-3">
+                        <label class="email col-md-4 col-form-label">Email</label>
+                        <div class="col-md-8">
+                            <input class="form-control" @bind="email" />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="password col-md-4 col-form-label">Password</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="password" @bind="password" />
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="confirmPassword col-md-4 col-form-label">Confirm Password</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="password" @bind="confirmPassword" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-md-4 col d-grid">
+                            <button class="btn-register" @onclick="RegisterAsync">Register</button>
+                        </div>
+                        <div class="col d-grid">
+                            <button class="btn-cancel" @onclick="RedirectToLoginPage">Cancel</button>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
-
-
         </div>
-    </div>
-</div>
-
+    </main>
+</body>
 
 
 
@@ -85,7 +87,7 @@
         var resp = await authStateProvider.RegisterAsync(registerDto);
         if(resp.Succeded)
         {
-            navManager.NavigateTo("/");
+            navManager.NavigateTo("/Login");
         }
         else
         {
@@ -93,8 +95,8 @@
         }
     }
 
-    private void RedirectToHomePage()
+    private void RedirectToLoginPage()
     {
-        navManager.NavigateTo("/");
+        navManager.NavigateTo("/Login");
     }
 }

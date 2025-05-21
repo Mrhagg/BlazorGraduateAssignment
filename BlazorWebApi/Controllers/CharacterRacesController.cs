@@ -1,4 +1,6 @@
 ﻿using BlazorWebApi.Dtos;
+using BlazorWebApi.Interface;
+using BlazorWebApi.Repositorys;
 using BlazorWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,11 +11,14 @@ namespace BlazorWebApi.Controllers;
 [ApiController]
 public class CharacterRacesController : ControllerBase
 {
-    private readonly ApplicationDbContext context;
 
-    public CharacterRacesController(ApplicationDbContext context)
+    private readonly ApplicationDbContext context;
+    private readonly ICharacterRepository characterRepository;
+
+    public CharacterRacesController(ApplicationDbContext context, ICharacterRepository characterRepository)
     {
         this.context = context;
+        this.characterRepository = characterRepository;
     }
 
   
@@ -102,5 +107,49 @@ public class CharacterRacesController : ControllerBase
         };
 
         return Ok(dto);
+    }
+
+    [HttpGet("{id}")]
+    public async Task <ActionResult<RaceDto>> GetRaceById(int id)
+    {
+       var race = await characterRepository.GetById(id);
+        if (race == null)
+        {
+            return NotFound();
+        }
+
+        var raceDto = new RaceDto
+        {
+            Id = race.Id,
+            Name = race.Name,
+            Description = race.Description,
+            ImageFileName = race.ImageFileName,
+            AllowedClasses = race.RaceWowClasses?.Select(rwc => new WowClassDto
+            {
+                Id = rwc.WowClassId,
+                Name = rwc.WowClass.Name,
+            }).ToList()
+
+        };
+
+        return Ok(raceDto);
+    }
+
+    [HttpGet("{id}/classes")]
+    public async Task<ActionResult<List<WowClassDto>>> GetAllowedClasses(int id)
+    {
+        var race = await characterRepository.GetById(id);
+        if (race == null)
+            return NotFound();
+
+        var allowedClasses = race.RaceWowClasses?
+            .Where(rwc => rwc.WowClass != null) 
+            .Select(rwc => new WowClassDto
+            {
+                Id = rwc.WowClassId,
+                Name = rwc.WowClass.Name
+            }).ToList();
+
+        return Ok(allowedClasses);
     }
 }

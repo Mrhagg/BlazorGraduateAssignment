@@ -1,38 +1,47 @@
 ﻿@page "/Profile"
 @inject HttpClient http
-
 @attribute [Authorize]
 
+<body>
+    <main class="container mt-5">
+        @if (userProfile == null)
+        {
+            <p class="text-light"><em>@message</em></p>
+        }
+        else
+        {
+            <div class="profile-box p-4 rounded">
+                <h3 class="title">Profile</h3>
 
-@if(userProfile == null)
-{
-    <p><em>@message</em></p>
-}
-else
-{
-    <h3 class="mb-3">Profile</h3>
+                <div class="name row mb-4">
+                    <label class="col-md-3 col-form-label profile-label">User Name</label>
+                    <div class="col-md-8">
+                        <input class="form-control-plaintext profile-input" readonly @bind="userProfile.Name" />
+                    </div>
+                </div>
 
-    <div class="row mb-3">
-        <label class="col-md-3 col-form-label">Name</label>
-        <div class="col-md-8">
-           <input class="form-control-plaintext" readonly @bind="userProfile.Name"/>
-        </div>
-    </div>
+                <div class="row mb-4">
+                    <label class="col-md-3 col-form-label profile-label">Email</label>
+                    <div class="email col-md-8">
+                        <input class="form-control-plaintext profile-input" readonly @bind="userProfile.Email" />
+                    </div>
+                </div>
 
-    <div class="row mb-3">
-        <label class="col-md-3 col-form-label">Email</label>
-        <div class="col-md-8">
-            <input class="form-control-plaintext" readonly @bind="userProfile.Email" />
-        </div>
-    </div>
+                <div class="row mb-4">
+                    <label class="col-md-3 col-form-label profile-label">Phone</label>
+                    <div class="phone col-md-8">
+                        <input class="form-control-plaintext profile-input" readonly @bind="userProfile.PhoneNumber" />
+                    </div>
+                </div>
+            </div>
 
-    <div class="row mb-3">
-        <label class="col-md-3 col-form-label">Phone</label>
-        <div class="col-md-8">
-            <input class="form-control-plaintext" readonly @bind="userProfile.PhoneNumber" />
-        </div>
-    </div>
-}
+
+        }
+    </main>
+</body>
+
+
+
 
 @code {
     public UserProfile? userProfile = null;

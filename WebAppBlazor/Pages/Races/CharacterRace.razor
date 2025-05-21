@@ -1,0 +1,124 @@
+﻿@page "/Character-race/{Id:int}"
+@inject HttpClient Http
+@inject NavigationManager navManager
+@inject IJSRuntime JS
+
+
+<body>
+    <main>
+        @if (race == null)
+        {
+            <p>Loading race...</p>
+        }
+        else
+        {
+            <div class="race-grid">
+                <h3 class="title">@race.Name</h3>
+
+                <div class="tabs">
+                    <button @onclick='() => OnTabChangedAsync("overview")' class="@GetTabClass("overview")">Overview</button>
+                    <button @onclick='() => OnTabChangedAsync("classes")' class="@GetTabClass("classes")">Classes</button>
+
+                </div>
+
+                <div class="race-details">
+                    @if (selectedTab == "overview")
+                    {
+                        <img src="@race.ImageUrl" alt="@race.Name" class="race-page-img" />
+                        <p>@race.Description</p>
+                        <h5 class="racial">Racial Abilities:</h5>
+                        <ul>
+                            @foreach (var ability in race.RacialAbilities ?? Enumerable.Empty<string>())
+                            {
+                                <li>@ability</li>
+                            }
+                        </ul>
+
+                        <button class="back-button" @onclick="GoBack">Cancel</button>
+                    }
+                    else if (selectedTab == "classes")
+                    {
+                        @if (wowClasses == null)
+                        {
+                            <p>Loading classes...</p>
+                        }
+                        else
+                        {
+                            <div class="class-grid">
+                                @foreach (var wowClass in wowClasses)
+                                {
+                                    <div class="class-card" @onclick="() => SelectClass(wowClass)">
+                                        <img src="@wowClass.ImageUrl" alt="@wowClass.Name" class="class-image" />
+                                        <h4>@wowClass.Name</h4>
+                                        <p>@wowClass.Description</p>
+                                    </div>
+                                }
+                            </div>
+
+                            @if (selectedClass != null)
+                            {
+                                <div class="selected-class-details">
+                                    <h3>@selectedClass.Name</h3>
+                                    <p>@selectedClass.Description</p>
+
+                                    <h4>Specializations</h4>
+                                    <ul>
+                                        @foreach (var spec in selectedClass.Specializations)
+                                        {
+                                            <li>@spec.Name - @spec.RoleName</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </main>
+</body>
+
+
+
+    @code {
+
+    [Parameter] public int Id { get; set; }
+
+    private List<WowClassDto>? wowClasses;
+
+    private CharacterRaceDto? race;
+
+    private string selectedTab = "overview";
+
+    private WowClassDto? selectedClass;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        race = await Http.GetFromJsonAsync<CharacterRaceDto>($"api/CharacterRaces/{Id}");
+    }
+
+    private async Task OnTabChangedAsync(string tab)
+    {
+        selectedTab = tab;
+        if (tab == "classes" && wowClasses == null)
+        {
+            wowClasses = await Http.GetFromJsonAsync<List<WowClassDto>>($"api/CharacterRaces/{Id}/classes");
+        }
+    }
+
+    private string GetTabClass(string tab)
+    {
+        return selectedTab == tab ? "active-tab" : "";
+    }
+
+    private async Task GoBack()
+    {
+        await JS.InvokeVoidAsync("history.back");
+    }
+
+    private void SelectClass(WowClassDto wowClass)
+    {
+        selectedClass = wowClass;
+    }
+
+}

@@ -1,11 +1,13 @@
 using BlazorWebApi.Interface;
-using BlazorWebApi.Models;
+using BlazorWebApi.Repositorys;
 using BlazorWebApi.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Net;
 using System.Net.Mail;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer("name=SqlConnection");
 });
+
+builder.Services.AddScoped<ICharacterRepository, CharacterRaceRepository>();
+builder.Services.AddScoped<IWowClassService, WowClassService>();
+builder.Services.AddScoped<ISpecializationService, SpecializationService>();
+
+
 
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
@@ -68,6 +76,13 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.Migrate();
+    await DbSeeder.SeedAsync(dbContext);
+}
 
 
 if (app.Environment.IsDevelopment())

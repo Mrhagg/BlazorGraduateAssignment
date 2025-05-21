@@ -1,32 +1,51 @@
 ﻿@page "/factions/{FactionId:int}"
 @using WebAppBlazor.Components
 @inject HttpClient Http
+@inject NavigationManager navManager
 
-<h3 class="factionName">@factionName</h3>
+<body>
+    <main>
+        <h3 class="factionName">@factionName</h3>
 
-@if (races == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <select class="racelist" @onchange="OnRaceChanged">
-        <option class="raceoptions" value="">Choose Race</option>
-        @foreach (var race in races)
+        @if (races == null)
         {
-            <option value="@race.Id">@race.Name</option>
+            <p>Loading...</p>
         }
-    </select>
+        else
+        {
+            <div class="race-grid">
+                @foreach (var race in races)
+                {
+                    <a href="@($"Character-race/{race.Id}")" class="race-card">
+                        <img src="@race.ImageUrl" alt="@race.Name" class="race-image" />
+                        <h5>@race.Name</h5>
+                    </a>
+                }
 
-    @if (selectedRace != null)
-    {
-        <RaceDetails Race="selectedRace" />
-    }
-}
+
+            </div>
+
+            @if (selectedRace != null)
+            {
+                <RaceDetails Race="selectedRace" />
+            }
+
+            <button class="back-button" @onclick="BackToFactions">Cancel</button>
+        }
+
+
+
+    </main>
+</body>
+
 
 @code {
     [Parameter]
     public int FactionId { get; set; }
+
+    [Parameter]
+    public int Id { get; set; }
+
 
     private string? factionName;
     private List<CharacterRaceDto>? races;
@@ -52,5 +71,16 @@ else
             selectedRace = null;
         }
     }
+
+    private void SelectRace(CharacterRaceDto race)
+    {
+        selectedRace = race;
+    }
+
+    private void BackToFactions()
+    {
+        navManager.NavigateTo("/factions");
+    }
+
 }
 

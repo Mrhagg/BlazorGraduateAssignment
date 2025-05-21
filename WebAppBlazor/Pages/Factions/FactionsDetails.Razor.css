@@ -1,6 +1,7 @@
 ﻿.factionName{
     margin-bottom: 20px;
     font-family: 'Comic Sans MS';
+    color: #FFFFFF;
 }
 
 .racelist{
@@ -11,4 +12,61 @@
 
 .raceoptions{
     text-align: center;
+}
+
+.race-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.race-card {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    color: #ffffff;
+    font-family: 'Comic Sans MS';
+    text-decoration: none;
+    color: white;
+}
+
+.race-card.active {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+    transform: none;
+}
+
+
+.race-card:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.race-image {
+    width: 100%;
+    max-height: 120px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.back-button {
+    background-color: #444;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-left: 20px;
+    font-family: 'Comic Sans MS';
+}
+
+.back-button:hover {
+    background-color: #666;
 }

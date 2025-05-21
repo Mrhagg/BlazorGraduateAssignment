@@ -1,4 +1,5 @@
-﻿@if (Race == null)
+﻿
+@if (Race == null)
 {
     <p>No race chosen yet.</p>
 }
@@ -7,14 +8,19 @@ else
     <div class="race-details">
         <h4 class="faction">@Race.Name</h4>
 
-        <img src="@Race.ImageUrl" alt="@Race.Name" />
+        @if (!string.IsNullOrEmpty(Race.ImageUrl))
+        {
+            <img src="@Race.ImageUrl" alt="@Race.Name" class="race-image" />
+        }
 
-
-        <p>@Race.Description</p>
+        @if (!string.IsNullOrWhiteSpace(Race.Description))
+        {
+            <p>@Race.Description</p>
+        }
 
         <h5 class="abilities">Racial Abilities</h5>
         <ul>
-            @foreach (var ability in Race.RacialAbilities ?? new List<string> { "Ingen data" })
+            @foreach (var ability in Race.RacialAbilities ?? new List<string> { "No data could be found." })
             {
                 <li>@ability</li>
             }
@@ -22,15 +28,23 @@ else
 
         <h5 class="classes">Allowed Classes and Roles</h5>
         <ul>
-            @foreach (var c in Race.AllowedClasses ?? new List<ClassDto>())
+            @foreach (var c in Race.AllowedClasses ?? Enumerable.Empty<ClassDto>())
             {
                 <li>@c.Name (@c.Role)</li>
+            }
+
+            @if (Race.AllowedClasses == null || !Race.AllowedClasses.Any())
+            {
+                <li>Inga tillåtna klasser angivna</li>
             }
         </ul>
     </div>
 }
 
+
 @code {
     [Parameter]
     public CharacterRaceDto? Race { get; set; }
+
+   
 }
