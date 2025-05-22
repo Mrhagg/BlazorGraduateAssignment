@@ -1,6 +1,6 @@
 ﻿using BlazorWebApi.Dtos;
 using BlazorWebApi.Interface;
-using Microsoft.AspNetCore.Http;
+using BlazorWebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorWebApi.Controllers;
@@ -10,7 +10,7 @@ namespace BlazorWebApi.Controllers;
 public class SpecializationsController : ControllerBase
 {
     private readonly ISpecializationService _specializationService;
-
+    
     public SpecializationsController(ISpecializationService specializationService)
     {
         _specializationService = specializationService;
@@ -22,4 +22,6 @@ public class SpecializationsController : ControllerBase
         var result = await _specializationService.GetAllSpecializationsAsync();
         return Ok(result);
     }
+
+   
 }

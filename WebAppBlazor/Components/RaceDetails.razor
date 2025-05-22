@@ -20,7 +20,7 @@ else
 
         <h5 class="abilities">Racial Abilities</h5>
         <ul>
-            @foreach (var ability in Race.RacialAbilities ?? new List<string> { "No data could be found." })
+            @foreach (var ability in Race.RacialAbilities!)
             {
                 <li>@ability</li>
             }

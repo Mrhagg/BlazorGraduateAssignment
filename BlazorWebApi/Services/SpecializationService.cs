@@ -1,5 +1,6 @@
 ﻿using BlazorWebApi.Dtos;
 using BlazorWebApi.Interface;
+using BlazorWebApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlazorWebApi.Services;
@@ -48,6 +49,8 @@ public class SpecializationService : ISpecializationService
             }).FirstOrDefaultAsync();
     }
 
+
+
     private static string? GetDamageType(string? specName)
     {
         if (string.IsNullOrWhiteSpace(specName)) return null;
@@ -69,3 +72,4 @@ public class SpecializationService : ISpecializationService
         return "Unknown";
     }
 }
+    

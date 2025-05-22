@@ -47,7 +47,20 @@ img {
 }
 
 .tabs button:hover {
-    background-color: #666;
+    background-color: #b6afaf;
+}
+
+.tabs button:active {
+    color: #FFFFFF; 
+    border-radius: 5px;
+}
+
+.tabs .active-tab {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(159, 157, 157, 0,30);
+    text-decoration: underline;
 }
 
 .active-tab {
@@ -68,6 +81,71 @@ img {
 
 .back-button:hover {
     background-color: #666;
+}
+
+.class-grid {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: nowrap; 
+    gap: 20px;
+    overflow-x: auto; 
+    padding: 20px;
+}
+
+.class-card {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    color: #ffffff;
+    font-family: 'Comic Sans MS';
+    text-decoration: none;
+    color: white;
+}
+
+.class-card:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.class-card:active {
+    background-color: rgb(255, 255, 255, 0.6);
+    color: #FFFFFF;
+    border-radius: 5px;
+}
+
+.class-card.selected {
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 2px solid white;
+    box-shadow: 0 0 10px rgba(255,255,255,0.4);
+    color: black;
+    text-decoration: underline;
+}
+
+
+.class-image {
+    width: 100%;
+    max-height: 120px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.desc{
+    text-align: start;
+    margin-top: 20px;
+}
+
+.abilities {
+    text-align: start;
+    margin-bottom: 20px;
+}
+
+.racial {
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 

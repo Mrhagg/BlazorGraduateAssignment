@@ -9,5 +9,7 @@ public class CharacterRace
     public int FactionId { get; set; }
     public Factions Faction { get; set; } = null!;
 
+    public string? RacialAbilities { get; set; }
+
     public ICollection<RaceWowClass> RaceWowClasses { get; set; } = new List<RaceWowClass>();
 }

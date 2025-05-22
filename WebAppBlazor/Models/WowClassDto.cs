@@ -7,7 +7,7 @@ public class WowClassDto
 
     public string? Description { get; set; }
 
-    public string ImageUrl => $"images/classes/{(string.IsNullOrEmpty(ImageFileName) ? Name!.Replace(" ", "").ToLower() + ".png" : ImageFileName.ToLower())}";
+    public string ImageUrl => $"/images/classes/{(string.IsNullOrEmpty(ImageFileName) ? Name!.Replace(" ", "").ToLower() + ".jpg" : ImageFileName.ToLower())}";
 
     public string? ImageFileName { get; set; }
 

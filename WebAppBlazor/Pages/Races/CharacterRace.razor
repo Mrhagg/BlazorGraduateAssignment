@@ -18,21 +18,15 @@
                 <div class="tabs">
                     <button @onclick='() => OnTabChangedAsync("overview")' class="@GetTabClass("overview")">Overview</button>
                     <button @onclick='() => OnTabChangedAsync("classes")' class="@GetTabClass("classes")">Classes</button>
-
                 </div>
 
                 <div class="race-details">
                     @if (selectedTab == "overview")
                     {
                         <img src="@race.ImageUrl" alt="@race.Name" class="race-page-img" />
-                        <p>@race.Description</p>
+                        <p class="desc">@race.Description</p>
                         <h5 class="racial">Racial Abilities:</h5>
-                        <ul>
-                            @foreach (var ability in race.RacialAbilities ?? Enumerable.Empty<string>())
-                            {
-                                <li>@ability</li>
-                            }
-                        </ul>
+                        <h4 class="abilities">@race.RacialAbilities</h4>
 
                         <button class="back-button" @onclick="GoBack">Cancel</button>
                     }
@@ -47,7 +41,7 @@
                             <div class="class-grid">
                                 @foreach (var wowClass in wowClasses)
                                 {
-                                    <div class="class-card" @onclick="() => SelectClass(wowClass)">
+                                    <div class="class-card" @onclick="() => SelectClassAsync(wowClass)">
                                         <img src="@wowClass.ImageUrl" alt="@wowClass.Name" class="class-image" />
                                         <h4>@wowClass.Name</h4>
                                         <p>@wowClass.Description</p>
@@ -63,10 +57,18 @@
 
                                     <h4>Specializations</h4>
                                     <ul>
-                                        @foreach (var spec in selectedClass.Specializations)
+                                        @if(selectedClass.Specializations?.Any() == true)
                                         {
-                                            <li>@spec.Name - @spec.RoleName</li>
+                                            @foreach (var spec in selectedClass.Specializations)
+                                            {
+                                                <li>@spec.Name - @spec.RoleName</li>
+                                            }
                                         }
+                                        else
+                                        {
+                                            <li>Loading or no specializations found.</li>
+                                        }
+
                                     </ul>
                                 </div>
                             }
@@ -80,13 +82,16 @@
 
 
 
-    @code {
+@code {
 
     [Parameter] public int Id { get; set; }
 
     private List<WowClassDto>? wowClasses;
 
     private CharacterRaceDto? race;
+
+    public List<string> RacialAbilities { get; set; } = new List<string>();
+
 
     private string selectedTab = "overview";
 
@@ -116,9 +121,10 @@
         await JS.InvokeVoidAsync("history.back");
     }
 
-    private void SelectClass(WowClassDto wowClass)
+    private async Task SelectClassAsync(WowClassDto wowClass)
     {
         selectedClass = wowClass;
+        selectedClass.Specializations = await Http.GetFromJsonAsync<List<SpecializationDto>>($"api/WowClass/{Id}/specializations");
     }
 
 }

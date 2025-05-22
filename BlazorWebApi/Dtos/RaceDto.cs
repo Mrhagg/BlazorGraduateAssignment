@@ -6,6 +6,6 @@ public class RaceDto
     public string? Name { get; set; }
     public string? ImageFileName { get; set; }
     public string? Description { get; set; }
-
+    public string? RacialAbilities { get; set; }
     public List<WowClassDto>? AllowedClasses { get; set; }
 }

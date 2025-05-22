@@ -33,11 +33,7 @@ public class ApplicationDbContext : IdentityDbContext
             .WithMany(wc => wc.RaceWowClasses)
             .HasForeignKey(rc => rc.WowClassId);
 
-        modelBuilder.Entity<RaceWowClass>().HasData(
-            new RaceWowClass { CharacterRaceId = 17, WowClassId = 1 },
-            new RaceWowClass { CharacterRaceId = 17, WowClassId = 2 }
-            );
-
+       
         base.OnModelCreating(modelBuilder);
     }
 }

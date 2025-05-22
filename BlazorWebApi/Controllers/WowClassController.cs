@@ -11,10 +11,11 @@ namespace BlazorWebApi.Controllers;
 public class WowClassController : ControllerBase
 {
     private readonly IWowClassService _wowClassService;
-
-    public WowClassController(IWowClassService wowClassService)
+    private readonly ISpecializationService specializationService;
+    public WowClassController(IWowClassService wowClassService, ISpecializationService _specializationService)
     {
         _wowClassService = wowClassService;
+        specializationService = _specializationService; 
     }
 
     [HttpGet("wowclass/{classId}/specializations")]
@@ -36,6 +37,13 @@ public class WowClassController : ControllerBase
     {
         var classes = await _wowClassService.GetClassesByRaceIdAsync(raceId);
         return Ok(classes);
+    }
+
+    [HttpGet("{id}/specializations")]
+    public async Task<ActionResult<List<SpecializationDto>>> GetSpecializationsForClass(int id)
+    {
+        var result = await specializationService.GetSpecializationsByClassIdAsync(id);
+        return Ok(result);
     }
 
 }

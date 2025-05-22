@@ -4,6 +4,7 @@ using BlazorWebApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorWebApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250522162938_AddedRacialAbilities")]
+    partial class AddedRacialAbilities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +54,7 @@ namespace BlazorWebApi.Migrations
 
                     b.HasIndex("FactionId");
 
-                    b.ToTable("CharacterRaces", (string)null);
+                    b.ToTable("CharacterRaces");
                 });
 
             modelBuilder.Entity("BlazorWebApi.Models.Factions", b =>
@@ -70,7 +73,7 @@ namespace BlazorWebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Factions", (string)null);
+                    b.ToTable("Factions");
                 });
 
             modelBuilder.Entity("BlazorWebApi.Models.RaceWowClass", b =>
@@ -85,7 +88,7 @@ namespace BlazorWebApi.Migrations
 
                     b.HasIndex("WowClassId");
 
-                    b.ToTable("RaceWowClasses", (string)null);
+                    b.ToTable("RaceWowClasses");
                 });
 
             modelBuilder.Entity("BlazorWebApi.Models.Roles", b =>
@@ -101,7 +104,7 @@ namespace BlazorWebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("BlazorWebApi.Models.Specialization", b =>
@@ -127,7 +130,7 @@ namespace BlazorWebApi.Migrations
 
                     b.HasIndex("WowClassId");
 
-                    b.ToTable("Specializations", (string)null);
+                    b.ToTable("Specializations");
                 });
 
             modelBuilder.Entity("BlazorWebApi.Models.WowClass", b =>
@@ -154,7 +157,7 @@ namespace BlazorWebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WowClasses", (string)null);
+                    b.ToTable("WowClasses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -9,7 +9,7 @@ public class CharacterRaceDto
     public string? ImageFileName { get; set; }
     public string ImageUrl => $"images/races/{(string.IsNullOrEmpty(ImageFileName) ? Name!.Replace(" ", "").ToLower() + ".jpg" : ImageFileName.ToLower())}";
 
-    public List<string>? RacialAbilities { get; set; } 
+    public string? RacialAbilities { get; set; }
 
     public List<ClassDto>? AllowedClasses { get; set; }
 }

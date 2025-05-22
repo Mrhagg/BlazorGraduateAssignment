@@ -21,7 +21,7 @@ public static class DbSeeder
             {
                 Name = "Death Knight",
                 Description = "A powerful melee fighter with dark magic.",
-                ImageUrl = "deathknight.png",
+                ImageUrl = "deathknight.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Blood", Role = tankRole },
@@ -33,7 +33,7 @@ public static class DbSeeder
             {
                 Name = "Demon Hunter",
                 Description = "A swift and deadly melee fighter with demonic powers.",
-                ImageUrl = "demonhunter.png",
+                ImageUrl = "demonhunter.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Havoc", Role = damageRole },
@@ -44,7 +44,7 @@ public static class DbSeeder
             {
                 Name = "Druid",
                 Description = "A versatile shapeshifter and nature wielder.",
-                ImageUrl = "druid.png",
+                ImageUrl = "druid.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Balance", Role = damageRole },
@@ -57,7 +57,7 @@ public static class DbSeeder
             {
                 Name = "Evoker",
                 Description = "A master of draconic magic.",
-                ImageUrl = "evoker.png",
+                ImageUrl = "evoker.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Devastation", Role = damageRole },
@@ -69,7 +69,7 @@ public static class DbSeeder
             {
                 Name = "Hunter",
                 Description = "A skilled ranged damage dealer with pets.",
-                ImageUrl = "hunter.png",
+                ImageUrl = "hunter.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Beast Mastery", Role = damageRole },
@@ -81,7 +81,7 @@ public static class DbSeeder
             {
                 Name = "Mage",
                 Description = "A powerful ranged spellcaster.",
-                ImageUrl = "mage.png",
+                ImageUrl = "mage.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Arcane", Role = damageRole },
@@ -93,7 +93,7 @@ public static class DbSeeder
             {
                 Name = "Monk",
                 Description = "A versatile martial artist.",
-                ImageUrl = "monk.png",
+                ImageUrl = "monk.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Brewmaster", Role = tankRole },
@@ -105,7 +105,7 @@ public static class DbSeeder
             {
                 Name = "Paladin",
                 Description = "A holy warrior with healing and tanking capabilities.",
-                ImageUrl = "paladin.png",
+                ImageUrl = "paladin.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Holy", Role = healerRole },
@@ -117,7 +117,7 @@ public static class DbSeeder
             {
                 Name = "Priest",
                 Description = "A master of healing and light.",
-                ImageUrl = "priest.png",
+                ImageUrl = "priest.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Discipline", Role = healerRole },
@@ -129,7 +129,7 @@ public static class DbSeeder
             {
                 Name = "Rogue",
                 Description = "A stealthy melee damage dealer.",
-                ImageUrl = "rogue.png",
+                ImageUrl = "rogue.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Assassination", Role = damageRole },
@@ -141,7 +141,7 @@ public static class DbSeeder
             {
                 Name = "Shaman",
                 Description = "A versatile caster and melee fighter.",
-                ImageUrl = "shaman.png",
+                ImageUrl = "shaman.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Elemental", Role = damageRole },
@@ -153,7 +153,7 @@ public static class DbSeeder
             {
                 Name = "Warlock",
                 Description = "A master of dark magic and demons.",
-                ImageUrl = "warlock.png",
+                ImageUrl = "warlock.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Affliction", Role = damageRole },
@@ -165,7 +165,7 @@ public static class DbSeeder
             {
                 Name = "Warrior",
                 Description = "A strong and resilient fighter.",
-                ImageUrl = "warrior.png",
+                ImageUrl = "warrior.jpg",
                 Specializations = new List<Specialization>
                 {
                     new Specialization { Name = "Arms", Role = damageRole },
