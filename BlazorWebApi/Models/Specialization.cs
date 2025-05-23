@@ -11,6 +11,6 @@ public class Specialization
     public WowClass WowClass { get; set; }
 
     public int RoleId { get; set; }
-    public Roles Role { get; set; }
+    public Roles? Role { get; set; }
 
 }

@@ -18,6 +18,8 @@ public class ApplicationDbContext : IdentityDbContext
    public DbSet<Specialization> Specializations { get; set; }
    public DbSet<RaceWowClass> RaceWowClasses { get; set; }
 
+   public DbSet<TalentNode> TalentTree { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<RaceWowClass>()
@@ -33,7 +35,26 @@ public class ApplicationDbContext : IdentityDbContext
             .WithMany(wc => wc.RaceWowClasses)
             .HasForeignKey(rc => rc.WowClassId);
 
-       
+        modelBuilder.Entity<Specialization>()
+            .HasOne(s => s.WowClass)
+            .WithMany(w => w.Specializations)
+            .HasForeignKey(s => s.WowClassId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Specialization>()
+            .HasOne(s => s.Role)
+            .WithMany(r => r.ClassSpecializations)
+            .HasForeignKey(s => s.RoleId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        modelBuilder.Entity<TalentNode>()
+            .HasOne(t => t.Parent)
+            .WithMany(t => t.Children)
+            .HasForeignKey(t => t.ParentId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+
+
         base.OnModelCreating(modelBuilder);
     }
 }

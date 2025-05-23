@@ -1,0 +1,30 @@
+﻿@page "/talents"
+@inject HttpClient Http
+
+<h3>Talent Tree</h3>
+
+@if (talentTree == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @foreach (var root in talentTree)
+    {
+
+        <TreeNode TNode="TalentTreeDto" Node="root" />
+    }
+}
+
+@code {
+    private List<TalentTreeDto>? talentTree;
+
+    [Parameter]
+    public int SpecializationId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        talentTree = await Http.GetFromJsonAsync<List<TalentTreeDto>>($"api/TalenTree/specialization/{SpecializationId}");
+
+    }
+}

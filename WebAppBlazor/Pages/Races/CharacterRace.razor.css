@@ -148,4 +148,66 @@ img {
     margin-top: 20px;
 }
 
+.role-tank {
+    color: #3399ff; 
+    font-weight: bold;
+}
+
+.role-damage {
+    color: #e63946;
+    font-weight: bold;
+}
+
+.role-healer {
+    color: #2a9d8f; 
+    font-weight: bold;
+}
+
+.clickable-spec {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.clickable-spec:hover {
+    background-color: #f0f0f0;
+}
+
+.modal-open{
+    max-width: 600px;
+    margin: auto;
+    border-radius: 8px;
+
+
+}
+
+.talent-node {
+    color: rgba(0, 0, 0, 0.6);
+    font-family: 'Comic Sans MS';
+    text-decoration: none;
+}
+
+.modal-header {
+    color: rgba(0, 0, 0, 0.6);
+    font-family: 'Comic Sans MS';
+    font-size: 20px;
+}
+
+.talent-node {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    transition: border 0.3s, background-color 0.3s;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+.talent-node:hover {
+    border-color: #ccc;
+}
+
+.talent-node.selected {
+    border-color: #b6ad06; 
+    background-color: #eff6ff;
+}
 

@@ -4,6 +4,7 @@ using BlazorWebApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorWebApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250523121959_AddedSpecModelBuilder")]
+    partial class AddedSpecModelBuilder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,6 +121,9 @@ namespace BlazorWebApi.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RolesId")
+                        .HasColumnType("int");
+
                     b.Property<int>("WowClassId")
                         .HasColumnType("int");
 
@@ -125,44 +131,11 @@ namespace BlazorWebApi.Migrations
 
                     b.HasIndex("RoleId");
 
+                    b.HasIndex("RolesId");
+
                     b.HasIndex("WowClassId");
 
                     b.ToTable("Specializations");
-                });
-
-            modelBuilder.Entity("BlazorWebApi.Models.TalentNode", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IconUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsUnlocked")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SpecializationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.HasIndex("SpecializationId");
-
-                    b.ToTable("TalentTree");
                 });
 
             modelBuilder.Entity("BlazorWebApi.Models.WowClass", b =>
@@ -423,10 +396,14 @@ namespace BlazorWebApi.Migrations
             modelBuilder.Entity("BlazorWebApi.Models.Specialization", b =>
                 {
                     b.HasOne("BlazorWebApi.Models.Roles", "Role")
-                        .WithMany("ClassSpecializations")
+                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("BlazorWebApi.Models.Roles", null)
+                        .WithMany("ClassSpecializations")
+                        .HasForeignKey("RolesId");
 
                     b.HasOne("BlazorWebApi.Models.WowClass", "WowClass")
                         .WithMany("Specializations")
@@ -437,24 +414,6 @@ namespace BlazorWebApi.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("WowClass");
-                });
-
-            modelBuilder.Entity("BlazorWebApi.Models.TalentNode", b =>
-                {
-                    b.HasOne("BlazorWebApi.Models.TalentNode", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("BlazorWebApi.Models.Specialization", "Specialization")
-                        .WithMany()
-                        .HasForeignKey("SpecializationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Parent");
-
-                    b.Navigation("Specialization");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -521,11 +480,6 @@ namespace BlazorWebApi.Migrations
             modelBuilder.Entity("BlazorWebApi.Models.Roles", b =>
                 {
                     b.Navigation("ClassSpecializations");
-                });
-
-            modelBuilder.Entity("BlazorWebApi.Models.TalentNode", b =>
-                {
-                    b.Navigation("Children");
                 });
 
             modelBuilder.Entity("BlazorWebApi.Models.WowClass", b =>

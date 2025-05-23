@@ -3,7 +3,6 @@
 @inject NavigationManager navManager
 @inject IJSRuntime JS
 
-
 <body>
     <main>
         @if (race == null)
@@ -56,20 +55,25 @@
                                     <p>@selectedClass.Description</p>
 
                                     <h4>Specializations</h4>
-                                    <ul>
-                                        @if(selectedClass.Specializations?.Any() == true)
-                                        {
-                                            @foreach (var spec in selectedClass.Specializations)
+                                    @if (isLoadingSpecs)
+                                    {
+                                        <p><em>Loading specs...</em></p>
+                                    }
+                                    else if (specializations.Any())
+                                    {
+                                        <ul>
+                                            @foreach (var spec in specializations)
                                             {
-                                                <li>@spec.Name - @spec.RoleName</li>
+                                                <li class="clickable-spec @GetRoleClass(spec.RoleName!)" @onclick="() => OpenTalentModalAsync(spec)">
+                                                    @GetRoleIcon(spec.RoleName!) @spec.Name - @spec.RoleName
+                                                </li>
                                             }
-                                        }
-                                        else
-                                        {
-                                            <li>Loading or no specializations found.</li>
-                                        }
-
-                                    </ul>
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <p>Could not find any given specializations..</p>
+                                    }
                                 </div>
                             }
                         }
@@ -79,6 +83,43 @@
         }
     </main>
 </body>
+        
+
+        <Modal @bind-Visible="isTalentModalVisible" Scrollable="true" Class="custom-talent-modal">
+           <ModalContent Size="ModalSize.Default">
+                <ModalHeader>
+                    <div class="modal-header">
+                        Talent Tree for @selectedSpecialization?.Name
+                    </div>
+                    <Button CloseButton Clicked="CloseTalentModal" />
+                </ModalHeader>
+                <ModalBody>
+                    @if (isLoadingTalentTree)
+                    {
+                        <p>Loading talent tree...</p>
+                    }
+                    else if (talentTree == null || !talentTree.Any())
+                    {
+                        <p>No talents found..</p>
+                    }
+                    else
+                    {
+                        @foreach (var talent in talentTree)
+                        {
+                            var isSelected = selectedTalentIds.Contains(talent.Id);
+                            <div class="talent-node @(isSelected ? "selected" : "")"
+                                @onclick="() => ToggleTalent(talent.Id)">
+                                <h5>@talent.Name</h5>
+                                <p>@talent.Description</p>
+
+                            </div>
+                        }
+                    }
+                </ModalBody>
+           </ModalContent>
+           
+        </Modal>
+    
 
 
 
@@ -92,10 +133,27 @@
 
     public List<string> RacialAbilities { get; set; } = new List<string>();
 
+    private List<SpecializationDto> specializations = new();
+
+    private SpecializationDto? selectedSpecialization;
+
+    private List<TalentTreeDto> talentTree = new();
+
+    private bool isTalentModalVisible = false;
+
+    private int? selectedClassId;
+
+    private bool isLoadingSpecs = false;
+
+    private bool isLoadingTalentTree = false;
+
+    private HashSet<int> selectedTalentIds = new();
 
     private string selectedTab = "overview";
 
     private WowClassDto? selectedClass;
+
+
 
     protected override async Task OnParametersSetAsync()
     {
@@ -111,6 +169,11 @@
         }
     }
 
+    private async Task LoadTalentTreeForSpec(SpecializationDto spec)
+    {
+        talentTree = await Http.GetFromJsonAsync<List<TalentTreeDto>>($"api/TalentTree/specialization/{spec.Id}");
+    }
+
     private string GetTabClass(string tab)
     {
         return selectedTab == tab ? "active-tab" : "";
@@ -124,7 +187,75 @@
     private async Task SelectClassAsync(WowClassDto wowClass)
     {
         selectedClass = wowClass;
-        selectedClass.Specializations = await Http.GetFromJsonAsync<List<SpecializationDto>>($"api/WowClass/{Id}/specializations");
+        isLoadingSpecs = true;
+        specializations.Clear();
+        StateHasChanged();
+
+        await LoadSpecs(wowClass.Id);
+
+        isLoadingSpecs = false;
+        StateHasChanged();
+
+
     }
+
+    private async Task LoadSpecs(int classId)
+    {
+        selectedClassId = classId;
+        specializations = await Http.GetFromJsonAsync<List<SpecializationDto>>($"api/WowClass/{classId}/specializations");
+    }
+
+    private string GetRoleClass(string role)
+    {
+        return role.ToLower() switch
+        {
+            "tank" => "role-tank",
+            "damage" => "role-damage",
+            "dps" => "role-damage", 
+            "healer" => "role-healer",
+            _ => ""
+        };
+    }
+
+    private MarkupString GetRoleIcon(string role)
+    {
+        var iconHtml = role.ToLower() switch
+        {
+            "healer" => "<i class='fa-solid fa-cross'></i>",
+            "tank" => "<i class='fa-solid fa-shield'></i>",
+            "damage" or "dps" => "<i class='fa-solid fa-fire'></i>", 
+            _ => ""
+        };
+
+        return new MarkupString(iconHtml);
+    }
+
+    private async Task OpenTalentModalAsync(SpecializationDto spec)
+    {
+        selectedSpecialization = spec;
+        talentTree = null!; 
+        isTalentModalVisible = true;
+
+        isLoadingTalentTree = true;
+        talentTree = await Http.GetFromJsonAsync<List<TalentTreeDto>>($"api/TalenTree/specialization/{spec.Id}");
+        isLoadingTalentTree = false;
+
+        StateHasChanged();
+    }
+
+    private void CloseTalentModal()
+    {
+        isTalentModalVisible = false;
+        selectedSpecialization = null;
+        talentTree = null;
+        selectedTalentIds.Clear();
+    }
+
+    private void ToggleTalent(int id)
+    {
+        if (!selectedTalentIds.Add(id))
+            selectedTalentIds.Remove(id);
+    }
+
 
 }

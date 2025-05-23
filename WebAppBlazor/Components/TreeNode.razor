@@ -1,0 +1,46 @@
+﻿@typeparam TNode
+
+@if (Node != null)
+{
+    <div class="tree-node">
+        <span>@GetNodeLabel(Node)</span>
+
+        @if (GetChildren(Node) is List<TNode> children && children.Any())
+        {
+            <ul>
+                @foreach (var child in children)
+                {
+                    <li>
+                        <TreeNode TNode="TNode" Node="child" />
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+}
+
+@code {
+    [Parameter] public TNode? Node { get; set; }
+
+    
+    private string GetNodeLabel(TNode node)
+    {
+        if (node is TalentTreeDto dto)
+        {
+            return dto.Name!;
+        }
+
+        return "Unknown";
+    }
+
+    private List<TNode> GetChildren(TNode node)
+    {
+        if (node is TalentTreeDto dto)
+        {
+            return dto.Children?.Cast<TNode>().ToList()!;
+        }
+
+        return new List<TNode>();
+    }
+}
+

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Net;
 using System.Net.Mail;
+using static DbSeeder;
 
 
 
@@ -79,9 +80,12 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    dbContext.Database.Migrate();
-    await DbSeeder.SeedAsync(dbContext);
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ApplicationDbContext>();
+
+    context.Database.Migrate();
+    await DbSeeder.SeedAsync(context);
+    await TalentTreeSeeder.SeedAsync(context);
 }
 
 

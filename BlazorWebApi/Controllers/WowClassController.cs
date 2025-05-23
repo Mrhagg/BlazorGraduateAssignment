@@ -18,13 +18,6 @@ public class WowClassController : ControllerBase
         specializationService = _specializationService; 
     }
 
-    [HttpGet("wowclass/{classId}/specializations")]
-    public async Task<ActionResult<List<SpecializationDto>>> GetSpecs(int classId)
-    {
-        var result = await _wowClassService.GetSpecializationsByClassIdAsync(classId);
-        return Ok(result);
-    }
-
     [HttpGet]
     public async Task<ActionResult<List<WowClassDto>>> GetAll()
     {
