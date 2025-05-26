@@ -7,9 +7,11 @@
     border: 1px solid #FFFFFF;
 }
 
-.profile{
-    align-items:center;
+.profile {
+    align-items: center;
     color: #FFFFFF;
+    font-size: 1.3rem;
+    margin-left: 1rem;
 }
 
 .top-row {
@@ -21,6 +23,52 @@
     background-attachment: fixed;
     
 }
+
+.sidebar h5.quiz {
+    color: #ffc107;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 0.75rem;
+}
+
+.sidebar ul li a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+}
+
+.sidebar ul li a:hover {
+    color: #000000;     
+    text-decoration: underline;
+}
+
+.sidebar {
+    margin-top: 4rem;
+    background-color: transparent;
+    width: 240px;
+    height: 100vh;
+    padding: 1.5rem 1rem;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.sidebar[hidden] {
+    transform: translateX(-100%);
+}
+
 .navbar-logo {
     height: 40px;
     margin-right: 15px;
@@ -28,9 +76,22 @@
 }
 
 .navbar-brand {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
     font-family: 'Comic Sans MS';
 }
+
+.navbar-toggler {
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' ... %3C/svg%3E");
+}
+
 
 .bi {
     display: inline-block;

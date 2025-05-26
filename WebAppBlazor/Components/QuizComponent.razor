@@ -1,0 +1,119 @@
+﻿@page "/wow-quiz"
+
+<body>
+    <main class="quiz-main">
+        <h3 class="quiz-title">World of Warcraft Quiz</h3>
+
+        <div class="quiz-container">
+            @if (!quizFinished)
+            {
+                <h4 class="quiz-question">@currentQuestion.Text</h4>
+
+                @foreach (var option in currentQuestion.Options)
+                {
+                    <button class="quiz-option" @onclick="() => SelectOption(option)" disabled="@answered">
+                        @option
+                    </button>
+                }
+
+                @if (answered)
+                {
+                    <div class="quiz-feedback @(isCorrectAnswer ? "correct" : "wrong")">
+                        @(isCorrectAnswer ? "Correct!" : $"Wrong! The correct answer is: {currentQuestion.CorrectAnswer}")
+                    </div>
+                    <button class="quiz-next" @onclick="NextQuestion">Next Question</button>
+                }
+            }
+            else
+            {
+                <div class="quiz-result">
+                    <h5>Results</h5>
+                    <p>You scored @score out of @questions.Count!</p>
+                    <button class="quiz-restart" @onclick="RestartQuiz">Try Again</button>
+                </div>
+            }
+        </div>
+    </main>
+</body>
+
+
+@code {
+    private int currentQuestionIndex = 0;
+    private bool answered = false;
+    private bool isCorrectAnswer = false;
+    private int score = 0;
+    private bool quizFinished = false;
+
+    private List<Question> questions = new()
+    {
+        new Question(
+            "Which faction do Orcs, Taurens, and Trolls belong to?",
+            new [] { "Alliance", "Horde", "Neutral" },
+            "Horde"
+        ),
+        new Question(
+            "Which two races can play as Demon Hunters?",
+            new [] { "Blood Elf and Night Elf", "Orc and Tauren", "Human and Dwarf" },
+            "Blood Elf and Night Elf"
+        ),
+        new Question(
+            "Which class is known for healing others and using holy spells?",
+            new [] { "Warrior", "Paladin", "Rogue" },
+            "Paladin"
+        ),
+        new Question(
+            "Which race is exclusive to the Alliance and known for technical skills?",
+            new [] { "Gnome", "Undead", "Troll" },
+            "Gnome"
+        ),
+        new Question(
+            "Which class can use stealth and deal a lot of damage quickly?",
+            new [] { "Mage", "Rogue", "Druid" },
+            "Rogue"
+        ),
+        new Question(
+            "Which faction do Night Elves and Dwarves belong to?",
+            new [] { "Horde", "Alliance", "Neutral" },
+            "Alliance"
+        ),
+    };
+
+    private Question currentQuestion => questions[currentQuestionIndex];
+
+    private void SelectOption(string option)
+    {
+        if (answered)
+            return;
+
+        answered = true;
+        isCorrectAnswer = option == currentQuestion.CorrectAnswer;
+
+        if (isCorrectAnswer)
+        {
+            score++;
+        }
+    }
+
+    private void NextQuestion()
+    {
+        answered = false;
+        isCorrectAnswer = false;
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex >= questions.Count)
+        {
+            quizFinished = true;
+        }
+    }
+
+    private void RestartQuiz()
+    {
+        currentQuestionIndex = 0;
+        score = 0;
+        answered = false;
+        isCorrectAnswer = false;
+        quizFinished = false;
+    }
+
+    private record Question(string Text, string[] Options, string CorrectAnswer);
+}

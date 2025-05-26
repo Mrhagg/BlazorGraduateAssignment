@@ -1,6 +1,4 @@
-﻿
-
-<div class="top-row ps-3 navbar navbar-dark">
+﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">WoWInformation</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -12,13 +10,33 @@
         </button>
     </div>
 </div>
-
+<div class="sidebar">
+    <nav class="sidebar" hidden="@CollapseNavMenu">
+       
+        <h5 class="quiz">Quick find</h5>
+        <ul class="list-unstyled">
+            <li><a class="text-light" href="/factions">Playable factions</a></li>
+            <li><a class="text-light" href="/classes">All classes</a></li>
+            <li><a class="text-light" href="/guides">Beginners tips</a></li>
+            <li><a class="text-light" href="/wow-quiz">WoW Quiz</a></li>  
+        </ul>
+    </nav>
+</div>
 
 
 @code {
+
+    [Parameter]
+    public bool CollapseNavMenu { get; set; }
+
+    [Parameter]
+    public EventCallback OnToggleNavMenu { get; set; }
+
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private bool showQuiz = false;
 
     private void ToggleNavMenu()
     {

@@ -1,0 +1,41 @@
+﻿@page "/classes"
+@inject HttpClient Http
+
+<h2 class="page-title">All Playable Classes</h2>
+
+@if (classes == null)
+{
+    <p>Loading classes...</p>
+}
+else
+{
+    <div class="class-grid">
+        @foreach (var wowClass in classes)
+        {
+            <div class="class-card">
+                <img src="@wowClass.ImageUrl" alt="@wowClass.Name" />
+                <h3>@wowClass.Name</h3>
+                <p>@wowClass.Description</p>
+
+                <h4>Specializations</h4>
+                <ul>
+                    @foreach (var spec in wowClass.Specializations)
+                    {
+                        <li>
+                            <strong>@spec.Name</strong> – @spec.RoleName (@spec.DamageType)
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    private List<WowClassDto>? classes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        classes = await Http.GetFromJsonAsync<List<WowClassDto>>("api/wowclass");
+    }
+}

@@ -1,0 +1,67 @@
+﻿.page-title {
+    font-family: 'Georgia', serif;
+    color: #f5c518; /* WoW gold */
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    font-size: 2.8rem;
+    text-shadow: 1px 1px 3px #b38f00;
+}
+
+.guide-section {
+    background: linear-gradient(145deg, #2c2c3e, #1a1a2e);
+    color: #e0e0e0;
+    margin: 1.5rem auto;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    max-width: 720px;
+    box-shadow: 0 6px 15px rgba(245, 197, 24, 0.5);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: box-shadow 0.3s ease;
+}
+
+    .guide-section:hover {
+        box-shadow: 0 10px 30px rgba(245, 197, 24, 0.8);
+    }
+
+h3 {
+    color: #f5c518;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-family: 'Comic Sans MS';
+    border-bottom: 2px solid #f5c518;
+    padding-bottom: 0.25rem;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+}
+
+ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    list-style-type: square;
+}
+
+ul li {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+p {
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    font-family: 'Comic Sans MS';
+    color: #ddd;
+}
+
+@media (max-width: 768px) {
+    .guide-section {
+        padding: 1.5rem 1.5rem;
+        margin: 1rem 1rem;
+    }
+
+    .page-title {
+        font-size: 2.2rem;
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+    }
+}

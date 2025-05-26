@@ -7,6 +7,9 @@ public class SpecializationDto
     public string? RoleName { get; set; }
     public string? DamageType { get; set; }
 
-    public int TalentTreeId { get; set; } 
+    public int TalentTreeId { get; set; }
+
+    public bool IsBeginnerFriendly { get; set; }
+
 
 }

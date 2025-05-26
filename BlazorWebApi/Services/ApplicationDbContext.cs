@@ -17,7 +17,6 @@ public class ApplicationDbContext : IdentityDbContext
    public DbSet<Roles> Roles { get; set; }
    public DbSet<Specialization> Specializations { get; set; }
    public DbSet<RaceWowClass> RaceWowClasses { get; set; }
-
    public DbSet<TalentNode> TalentTree { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -53,6 +52,7 @@ public class ApplicationDbContext : IdentityDbContext
             .HasForeignKey(t => t.ParentId)
             .OnDelete(DeleteBehavior.Restrict);
 
+       
 
 
         base.OnModelCreating(modelBuilder);

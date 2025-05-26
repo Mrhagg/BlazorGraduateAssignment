@@ -1,53 +1,67 @@
 ﻿.factions {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   margin-right: 15rem;
-   gap: 8rem;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 3rem;
 }
 
-.horde {
-    color: red;
-    margin-left: 3rem;
-    margin-bottom: 2rem;
-
-    font-family: 'Comic Sans MS';
-}
-
-.horde:hover{
-    color: #FFFFFF;
+.factions > div {
+    text-align: center;
     cursor: pointer;
+    transition: transform 0.3s ease;
+    user-select: none;
+}
+
+.factions > div:hover {
+    transform: scale(1.05);
 }
 
 .alliance {
     color: #0f6ca9;
-    margin-left: 3rem;
-    margin-bottom: 2rem;
-
-    font-family: 'Comic Sans MS';
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
 }
 
 .alliance:hover {
-    color: #FFFFFF;
-    cursor: pointer;
+    color: #f5c518;
+}
+
+.horde {
+    color: #c0392b;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.horde:hover {
+    color: #f5c518;
 }
 
 .img {
-    color: #000000;
-    border: 2px solid #FFFFFF;
-    border-radius: 10px;
-    margin-left: 20px;
+    width: 150px;
+    border-radius: 12px;
+    border: 3px solid #f5c518;
+    box-shadow: 0 0 15px rgba(245, 197, 24, 0.8);
+    transition: filter 0.3s ease, box-shadow 0.3s ease;
 }
 
+.img:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 0 25px rgba(245, 197, 24, 1);
+}
 
 .title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Comic Sans MS';
-  color: #FFFFFF;
-  margin-bottom: 5rem;
-  margin-top: 10rem;
-  margin-right: 15rem;
+    text-align: center;
+    color: #f5c518;
+    transition: color 0.3s ease;
 }
 
+.title:hover {
+    color: #f5c518;
+    cursor: pointer;
+}

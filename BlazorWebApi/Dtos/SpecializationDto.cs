@@ -8,4 +8,6 @@ public class SpecializationDto
     public string? Name { get; set; }
     public string? RoleName { get; set; }
     public string? DamageType { get; set; }
+
+    public bool IsBeginnerFriendly { get; set; }
 }

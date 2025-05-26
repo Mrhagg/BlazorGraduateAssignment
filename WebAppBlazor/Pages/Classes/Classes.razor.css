@@ -1,0 +1,36 @@
+﻿.page-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #FFFFFF;
+    font-family: 'Comic Sans MS';
+}
+
+.class-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.class-card {
+    background-color: #1e1e2f;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    color: #fff;
+}
+
+    .class-card img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+    }
+
+    .class-card h3 {
+        margin: 0.5rem 0;
+    }
+
+    .class-card ul {
+        padding-left: 1rem;
+    }

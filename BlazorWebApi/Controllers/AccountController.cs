@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
-using System.Net;
 using System.Text;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace BlazorWebApi.Controllers;
@@ -77,7 +75,7 @@ public class AccountController : ControllerBase
         var user = await userManager.FindByEmailAsync(model.ToEmail!);
         if (user == null)
         {
-            
+
             return Ok();
         }
 
@@ -132,6 +130,8 @@ public class AccountController : ControllerBase
             var errors = string.Join("; ", result.Errors.Select(e => e.Description));
             return BadRequest(errors);
         }
-           
+
     }
+
+
 }
